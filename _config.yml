@@ -1,0 +1,30 @@
+baseurl: "/blog" # The subpath of your site. Use "" if you're hosting a blog at the root level.
+url: "http://www.kranthikiran.in/" # the base hostname & protocol for your site
+title: "blogIn"
+email: guduru.kranthikiran@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  I am Web developer based from Hyderabad. I convert caffeine to code.
+github_username:  kranthikiran01
+facebook_username: kranthikiran.guduru1
+gems:
+  - jemoji
+exclude:
+  - "README.md"
+  - "CHANGELOG.md"
+  - "CNAME"
+  - "Gemfile"
+  - "Gemfile.lock"
+permalink: :title
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
