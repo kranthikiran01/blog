@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+
+
+  
+
+<title type="text">blogIn</title>
+<generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
+<link rel="self" type="application/atom+xml" href="/feed.xml" />
+<link rel="alternate" type="text/html" href="/" />
+<updated>2015-01-12T23:08:09+05:30</updated>
+<id>/</id>
+<author>
+  <name>Kranthi Kiran</name>
+  <uri>/</uri>
+  <email>guduru.kranthikiran@gmail.com</email>
+</author>
+
+
+<entry>
+  <title type="html"><![CDATA[Welcome to blogIn]]></title>
+  <link rel="alternate" type="text/html" href="/welcome/intro-post"/>
+  <id>/welcome/intro-post</id>
+  <published>2015-01-12T00:00:00+05:30</published>
+  <updated>2014-07-23T00:00:00-00:00</updated>
+  
+  <author>
+    <name>Kranthi Kiran</name>
+    <uri></uri>
+    <email>guduru.kranthikiran@gmail.com</email>
+  </author>
+  <category scheme="/tags/#Welcome" term="Welcome" /><category scheme="/tags/#Intro" term="Intro" />
+  <content type="html">
+  
+    &lt;p&gt;It has been an year since I decided to have a blog. I was so good at procrastination that I pushed working on making a blog. I used wordpress prior to this blog, but it didnt appeal me much. Lately, I somehow got inspired and started going through jekyll and this awesome &lt;a href=&quot;http://github.com/hmfaysal/Notepad&quot;&gt;theme&lt;/a&gt; on how to build a blog after a heavy self talk answering what am I doing and what should I do?. Also, I had to setup blogs for my teammates on a project under EPICS. So, blogging became part of routine and I find it fun.&lt;/p&gt;
+
+&lt;p&gt;Sooner or later I shall write about how to setup jekyll and make a blog using github pages similar to my blogIn&lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue:&quot; alt=&quot;:stuck_out_tongue:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; If you are really in a hurry, then you can use the wonderful documentation provided by jekyll. Hey! Do you know markdown? &lt;img class=&quot;emoji&quot; title=&quot;:heart:&quot; alt=&quot;:heart:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/2764.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;. Its a simple language used to write focused content. Its so simple and easy to write. Great that jekyll supports markdown. And, you already might have noticed the emoticons, who doesn’t love emoticons &lt;img class=&quot;emoji&quot; title=&quot;:heart_eyes:&quot; alt=&quot;:heart_eyes:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f60d.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;img class=&quot;emoji&quot; title=&quot;:sunglasses:&quot; alt=&quot;:sunglasses:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f60e.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;what-inspired-me-to-get-this-blog-done&quot;&gt;What inspired me to get this blog done?&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The best way to get something done is to begin.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;which I found on a wall somewhere I dont remember &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_winking_eye:&quot; alt=&quot;:stuck_out_tongue_winking_eye:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61c.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; I actually wanted to have a place where I can write about tutorials, share my experiences and anything that I find cool and awesome. So, blog is a place where I can do that right? Yes!. So, I made a blog &amp;amp; assigned a name blogIn(sounds cool isn’t it?)&lt;/p&gt;
+
+&lt;h5 id=&quot;also-you-might-think-what-am-i-going-to-blog-about&quot;&gt;Also, you might think, what am I going to blog about?&lt;/h5&gt;
+
+&lt;p&gt;Well, I don’t know. May be you might see upcoming posts from different topics from tutorials for various programming languages, web development stuff(like frameworks and techniques), DiY hacks, my experiences of being hacker, comics , &lt;img class=&quot;emoji&quot; title=&quot;:heart:&quot; alt=&quot;:heart:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/2764.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;Anime &amp;amp; TV-Series &amp;amp; shows(Yeah! I do watch’em) , politics and what not! Stay tuned!&lt;/p&gt;
+
+&lt;h5 id=&quot;what-is-my-next-post-about&quot;&gt;What is my next post about?&lt;/h5&gt;
+
+&lt;p&gt;Well, I think my next post would be about web development stuff. I have been doing projects on python frameworks, probably I shall blog about one of them.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thats all for now, stay tuned for more updates.&lt;/p&gt;
+
+&lt;h5 id=&quot;the-one&quot;&gt;- The One&lt;/h5&gt;
+&lt;p&gt;(Was that pen name kind of thing?(&lt;em&gt;May be&lt;/em&gt;)The One?(&lt;em&gt;seriously&lt;/em&gt; &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue:&quot; alt=&quot;:stuck_out_tongue:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;) sounds like character name from Matrix. Haha, you guessed it right)&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;/welcome/intro-post&quot;&gt;Welcome to blogIn&lt;/a&gt; was originally published by Kranthi Kiran at &lt;a href=&quot;&quot;&gt;blogIn&lt;/a&gt; on January 12, 2015.&lt;/p&gt;</content>
+</entry>
+
+</feed>
