@@ -44,7 +44,11 @@
 
     
     <url>
-        <loc>/welcome/intro-post</loc>
+        <loc>/linux-device-driver</loc>
+    </url>
+    
+    <url>
+        <loc>/intro-post</loc>
     </url>
     
 </urlset>

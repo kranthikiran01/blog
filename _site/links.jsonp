@@ -2,7 +2,12 @@ callback([
 
   {
     "text": "Welcome to blogIn",
-    "href": "/welcome/intro-post"
+    "href": "/intro-post"
+  } ,
+
+  {
+    "text": "Building Linux Device Driver - Part 1",
+    "href": "/linux-device-driver"
   } 
 
 ])

@@ -3,7 +3,7 @@ layout: post
 title: "Welcome to blogIn"
 description: 
 headline: 
-modified: 2014-07-23
+modified: 2015-01-14
 category: Welcome
 tags: [Welcome,Intro]
 imagefeature: 
@@ -31,7 +31,7 @@ Well, I don't know. May be you might see upcoming posts from different topics fr
 
 #####What is my next post about?
 
-Well, I think my next post would be about web development stuff. I have been doing projects on python frameworks, probably I shall blog about one of them.
+I have been doing projects using python and php frameworks, probably I shall blog about one of them soon.
 <br>
 
 Thats all for now, stay tuned for more updates.

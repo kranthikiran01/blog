@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BUILDING LINUX DEVICE DRIVER - PART 1 &vert; BLOGIN</title>
+<meta name="description" content="This post shall throw some insight into building a virtual device driver in linux">
+<meta name="keywords" content="linux, device driver, virtual device, character device driver">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/images/some.jpg">
+
+<meta name="twitter:title" content="Building Linux Device Driver - Part 1">
+<meta name="twitter:description" content="This post shall throw some insight into building a virtual device driver in linux">
+<meta name="twitter:creator" content="@Kranthi_Guduru">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building Linux Device Driver - Part 1">
+<meta property="og:description" content="This post shall throw some insight into building a virtual device driver in linux">
+<meta property="og:url" content="/linux-device-driver">
+<meta property="og:site_name" content="blogIn">
+<meta property="og:image" content="/images/some.jpg">
+
+
+
+
+
+<link rel="canonical" href="/linux-device-driver">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="blogIn Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,600,300,800,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/assets/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/normalize.css">
+    <link rel="stylesheet" href="/assets/css/vendor/nprogress.css">
+    <link rel="stylesheet" href="/assets/css/vendor/foundation.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link rel="stylesheet" href="/highlight/styles/ir_black.css">
+
+
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+<!-- 32x32 -->
+<!-- <link rel="shortcut icon" href="/favicon.png"> -->
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<!-- <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png"> -->
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png"> -->
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png"> -->
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+ -->
+<style type="text/css">@media only screen and (min-width:43.75em){.notepad-post-content div>p:first-child:first-letter{float:left;font-size:4.688rem;line-height:4.375rem;padding-top:.25rem;padding-right:.5rem;padding-left:.188rem;font-family:serif}}</style>
+</head>
+<body class="post-template" itemscope itemtype="http://schema.org/WebPage">  
+
+        <main id="notepad-post-container" class="notepad-post-container intro-effect-sliced" role="main">
+            <header class="notepad-post-header">
+                <div class="bg-img"></div>
+                
+                <div class="notepad-post-menu-header">
+
+                    <a class="notepad-blog-logo" href="">
+                        <img src="/images/logo.png" alt="Blog Logo" />
+                    </a>
+
+                <div class="notepad-blog-menu">      
+    <div class="notepad-mobile-menu show-for-small">
+        <a href="#"><i class="fa fa-bars"></i></a>
+    </div>
+    <ul class="notepad-menu">
+        <li class="notepad-mobile-close-btn show-for-small text-right">
+            <a href="#"><i class="fa fa-times"></i></a>
+        </li>
+
+            <li>
+                    <a href="/">Home</a>
+                 </li>
+
+            <li>
+                    <a href="/featured">Featured Posts</a>
+                 </li>
+
+            <li>
+                    <a href="/categories">Categories</a>
+                 </li>
+            
+           <li><a href="/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+    </ul>
+
+</div>
+            </div>
+
+            <div class="notepad-post-title bg-check">
+                <h1>Building Linux Device Driver - Part 1</h1>
+                <p>by <strong>Kranthi Kiran</strong> &#8212; on <a href="/tags/index.html#linux" data-toggle="tooltip" title="Posts tagged with linux" rel="tag">linux</a>&nbsp;&comma;&nbsp;<a href="/tags/index.html#device driver" data-toggle="tooltip" title="Posts tagged with device driver" rel="tag">device driver</a>&nbsp;&comma;&nbsp;<a href="/tags/index.html#virtual device" data-toggle="tooltip" title="Posts tagged with virtual device" rel="tag">virtual device</a>&nbsp;&comma;&nbsp;<a href="/tags/index.html#character device driver" data-toggle="tooltip" title="Posts tagged with character device driver" rel="tag">character device driver</a> <strong><time datetime="2015-01-14T00:00:00+05:30">14 Jan 2015</time></strong></p>
+            </div>
+            <div class="bg-img"></div>
+        </header>
+        <button class="trigger bg-check" data-info="Read more"><span>Trigger</span></button>
+        <img src="/images/some.jpg" alt="cover-image" />
+
+        <article class="notepad-post-content post">
+            <div><p>Hello reader!! I know its too bad to start the second post with geeky stuff but I felt this topic should definitely be blogged since its cool, building a device driver, whoa...I got excited when I was taught about this topic in my class.</p>
+
+<p>Ever thought how a computer monitors various drivers attached to it? Obviously there must be some software which does that. </p>
+
+<p>Yes, device driver is a software which drives, monitors, controls, directs and monitors the devices that are under computer&#39;s command. Consider, the device driver here as a car driver. What does a car driver do? He drives it, controls, manages and directs it. So, driver must be programmed/taught to do that. The device is now analogous to a car. You must not have thought that device driver is actually a software, right?</p>
+
+<p>Often, we also see drivers which are automated. That is, a device can either be controlled directly by the <strong>software</strong> i.e Device driver or the device can be controlled by a <strong>device controller</strong>(another piece of hardware ) which in turn is controlled by a software. We observe the latter case in bus drivers.
+Example for Device controllers: HDD controllers, Display controllers, Audio controllers, USB controller etc.</p>
+
+<p>Now, when we want to install the device driver in the system, if you are a windows user you must have seen a prompt while installation saying </p>
+
+<blockquote>
+<p>The driver has been installed, system reboot is required to activate the driver. Please restart.</p>
+</blockquote>
+
+<p>This is annoying, if you dont want the system to reboot ever. For example, a live server should never be restarted unless it is critical, and this is not critical. Also, there can be device with embedded operating system which strictly prohibits soft shutdown or soft reboot once it is live. What will you do in this case? This is where <strong>LINUX</strong> comes in handy.</p>
+
+<p><strong>Linux</strong> has the feature of loading and unloading the drivers dynamically. So, it wont require any stupid reboots. Commands like <code>insmod</code>, <code>lsmod</code>, <code>modprobe</code> and <code>rmmod</code> are used to load and unload the drivers on the fly. If you look in the <code>lib/modules/linux-headers-&lt;version&gt;/kernel</code> directory, you can find various modules which contain kernel objects. These kernel objects are actually the device drivers provided by linux build. The <strong>insmod</strong> command is used to load or insert a kernel object. <strong>lsmod</strong> is used to list the loaded modules. <strong>rmmod</strong> is used to remove a loaded module. <strong>modprobe</strong> is an advanced command with more features which is a partial mix of <strong>insmod</strong> and <strong>rmmod</strong> command features.</p>
+
+<p>So, the drivers in linux modules contain two parts - The init or constructor part and The exit or destructor part. These parts donot have relevance in dynamically loading or unloading but play a cool role during kernel compilation and system bootup. These parts are functions marked with <code>__init</code> and <code>__exit</code> macros which are copied to <code>init</code> and <code>exit</code> blocks of kernel image. During kernel compilation, all the driver&#39;s functions marked with _<em>init and _</em>exit are loaded into init and exit blocks of kernel image. All functions with __init are executed once during system bootup and the kernel will free up RAM by freeing the init block. Similarly, all functions in <code>exit</code> are executed during system shutdown.</p>
+
+<p>You might have wondered how do we write a driver program. We write these programs in Standard C language with linux headers. Oh, what are linux headers? When we write regular programs in C language, we use the headers which are present in <code>/usr/include</code> where as writing device driver programs require different headers which are present in the linux build or source. So, we need a different compiling procedure when we compile our driver program saying our driver needs headers from the linux build and not the usual headers. We use <code>Makefile</code> for this purpose. More on this in a meanwhile.</p>
+
+<p>Now, lets try writing our first driver template program using the headers in linux build. The headers are taken from <code>/usr/src/linux-headers-&lt;version&gt;</code>. The <code>&lt;version&gt;</code> can be known by using <code>uname -r</code> command.</p>
+
+<p>Source for mydriver.c</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;linux/module.h&gt;</span>
+<span class="cp">#include &lt;linux/kernel.h&gt;</span>
+<span class="cp">#include &lt;linux/init.h&gt;</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">mydriver_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">&quot;Driver registered</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">mydriver_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">&quot;Driver says goodbye!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">mydriver_init</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">mydriver_exit</span><span class="p">);</span>
+
+<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">&quot;GPL&quot;</span><span class="p">);</span>
+<span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">&quot;KRANTHI&quot;</span><span class="p">);</span>
+<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">&quot;Testing the driver template for creating,loading and unloading modules&quot;</span><span class="p">);</span></code></pre></div>
+
+<p>mydriver<em>init function is the part which gets executed when driver is loaded. Think of this as constructor. The linux kernel programming has some objective touch to the C as we observe from this example.
+Similarly, mydriver</em>exit function is executed when driver is unloaded.
+We convey this to the kernel by using module<em>init and module</em>exit methods which take the function names as argument.</p>
+
+<p>The <code>MODULE_LICENSE()</code> with &quot;GPL&quot; is used since, few linux distros like ubuntu or mint might ask for authorized or signed drivers. These are called vendor provided drivers. If we try to load our driver, we will get error while make or in the syslog saying tainted kernel, which means kernel is in a state that is not supported by community which develops it. So, we use GPL which stands for General Public License, stating that this driver is being built for OpenSource use and can be used port of Linux.</p>
+
+<p><code>MODULE_AUTHOR</code> and <code>MODULE_DESCRIPTION</code> are fields for describing the drivers author and its description.</p>
+
+<p>Now, that we wrote the template driver.c program, we should compile. As said earlier, we should use Makefile to do that.The following can be used for Makefile. Note that the file should be named as <code>Makefile</code> with no extension or prefixes or suffixes. Otherwise, your make command wont work.
+This is for linux versions &gt; 3. Also, I found problems with 64bit linux distro in combination with GCC version 4.9.2 . Try upgrading to <code>4.8.2</code> from <code>4.9.2</code> for fixing the unmet dependencies in 64bit linux machines.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">obj</span><span class="o">-</span><span class="nl">m</span> <span class="p">:</span><span class="o">=</span> <span class="n">driver</span><span class="p">.</span><span class="n">o</span>
+<span class="nl">KERNEL_DIR</span> <span class="p">:</span><span class="o">=</span> <span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="err">$</span><span class="p">(</span><span class="n">shell</span> <span class="n">uname</span> <span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span>
+<span class="nl">all</span><span class="p">:</span>
+    <span class="n">make</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="p">(</span><span class="n">KERNEL_DIR</span><span class="p">)</span> <span class="n">SUBDIRS</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">PWD</span><span class="p">)</span> <span class="n">modules</span>
+<span class="nl">clean</span><span class="p">:</span>
+    <span class="n">make</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="p">(</span><span class="n">KERNEL_DIR</span><span class="p">)</span> <span class="n">SUBDIRS</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">PWD</span><span class="p">)</span> <span class="n">clean</span></code></pre></div>
+
+<p><code>all</code> and <code>clean</code> are called targets. Note that Makefile is case sensitive. Tab and spaces are totally different for it. I had to headbang several times when my make didnt work for quite a while.
+<code>$(shell &lt;command&gt;)</code> is used to get command result in Makefile. <code>obj-m</code> is used for the list of what kernel modules are to be built. Here, driver.o is the object used to build the modules. We can have multiple objects using <code>obj-m += driver1.o</code> and <code>obj-m += driver2.o</code> for two drivers driver1.c and driver2.c programs.</p>
+
+<p>After this, type <code>make</code> in the directory containing driver.c and Makefile. You should see something like this.
+<img src="/images/linux-drivers/fig1-linux-driver-part1.png" alt="Figure 1"></p>
+
+<p><code>dmesg</code> is the command used to view the output of our printk(stands for <code>print from kernel</code>). These printk outputs are stored in <code>/var/log/syslog</code> file. Any command with <code>|</code> operator and head -5 or tail -5 suffix will yield the top 5 or bottom 5 rows of the result. Note that <code>rmmod</code> command should be supplied an argument with no .ko extensions where as <code>insmod</code> requires the argument to contain the .ko extension.</p>
+
+<p>Thats all for this post, explore the syslog file and play with the loading, reading and unloading of kernel objects. The next post shall throw insight on creating a virtual character device and writing drivers for it. Feel free to comment any issues you face while trying this tutorial.</p>
+
+<p>Stay tuned for the part 2 of building linux device drivers!</p>
+
+            </div>
+        </article>
+        <div class="cf"></div>
+        <div class="row text-center">
+            <section class="notepad-post-share">
+                <a class="twitter-icon" href="https://twitter.com/intent/tweet?text=&quot;Building Linux Device Driver - Part 1&quot;%20/linux-device-driver%20via%20&#64;Kranthi_Guduru"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="facebook-icon" href="https://www.facebook.com/sharer/sharer.php?u=/linux-device-driver"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="google-icon" href="https://plus.google.com/share?url=/linux-device-driver"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </section>
+        </div>
+        <div class="cf"></div>
+        
+            <div class="notepad-author-info">
+                <div class="row">
+                    <section class="notepad-post-author small-12 columns">
+                        
+                            <img src="/images/profile.jpg" class="notepad-post-author-avatar" alt="Kranthi Kiran's photo">
+                        
+                        
+                            <span class="author-label">Author</span>
+                            <h1>Kranthi Kiran</h1>
+                        
+                        
+                            <p><a href="mailto:guduru.kranthikiran@gmail.com" class="author-website">guduru.kranthikiran@gmail.com</a></p>
+                        
+                        
+                            <p>3/4th Computer Science Engineer from NIT Warangal</p>
+                        
+                    </section>
+                </div>
+            </div> 
+        
+        <div class="cf"></div>
+        
+        <section class="notepad-disqus row">
+    <div class="small-12 columns">
+        <h1 class="notepad-comments-header">Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'kkblogin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+        <div class="cf"></div>
+
+    <footer class="notepad-site-footer">
+    <div class="copyright">
+         <section>All content copyright <a href="/about">Kranthi Kiran</a> &copy; 2015 &bull; All rights reserved.</section>
+         <section>Proudly published with <a class="icon-ghost" href="https://jekyllrb.com/">Jekyll</a></section>
+    </div>
+    <div class="social-icons">
+        
+        
+        <a href="http://twitter.com/Kranthi_Guduru">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-twitter fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+        
+        
+        <a href="http://github.com/kranthikiran01">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-github fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+        <a href="http://facebook.com/guduru.kranthikiran">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-facebook fa-stack-1x"></i>
+            </span>
+        </a>
+        
+    </div>
+    
+    <div class="cf"></div>
+</footer> 
+</main>    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="/assets/js/vendor/modernizr.js"></script>
+    <script src="/assets/js/foundation.min.js"></script>
+    <script src="/assets/js/vendor/background-check.js"></script>
+    <script src="/assets/js/vendor/post-header-animations.js"></script>
+    <script src="/assets/js/notepad.js"></script>
+    <script src="/assets/js/scripts.min.js"></script>
+    <script src="/assets/js/vendor/nprogress.js"></script>
+    <script src="/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script>
+      $(document).foundation();
+    </script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56082186-1', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+<script>NProgress.start();var interval=setInterval(function(){NProgress.inc()},1000);jQuery(window).load(function(){clearInterval(interval);NProgress.done()});jQuery(window).unload(function(){NProgress.start()});</script> 
+</body>
+</html>

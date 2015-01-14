@@ -1,9 +1,17 @@
 [
 	
 		{
+		  "title"      : "Building Linux Device Driver - Part 1",
+		  "category"   : "Operating Systems",
+		  "url"        : "/linux-device-driver",
+		  "date"       : "2015-01-14 00:00:00 +0530",
+		  "shortdate"  : "January 14, 2015"
+		} ,
+	
+		{
 		  "title"      : "Welcome to blogIn",
 		  "category"   : "Welcome",
-		  "url"        : "/welcome/intro-post",
+		  "url"        : "/intro-post",
 		  "date"       : "2015-01-12 00:00:00 +0530",
 		  "shortdate"  : "January 12, 2015"
 		} 
