@@ -22,13 +22,14 @@ Start the xampp using xampp control panel in Windows(use the commands for linux)
 So, inorder to secure xampp, you can set password so that no one else can access unless they know your secure password. Otherwise, anyone in the same network as you are, can access your xampp directory, phpmyadmin, ftp etc. by knowing your IP address, and if it is insecure, then you can get locked out from using it, for example: changing user permissions in phpmyadmin etc.
 
 Here a list of missing security in XAMPP:
-*The MySQL administrator (root) has no password.
-*The MySQL daemon is accessible via network.
-*ProFTPD uses the password "lampp" for user "daemon".
-*PhpMyAdmin is accessible via network.
-*The XAMPP demopage is accessible via network.
-*The default users of Mercury and FileZilla are known.
-
+<ul>
+<li>The MySQL administrator (root) has no password.</li>
+<li>The MySQL daemon is accessible via network.</li>
+<li>ProFTPD uses the password "lampp" for user "daemon".</li>
+<li>PhpMyAdmin is accessible via network.</li>
+<li>The XAMPP demopage is accessible via network.</li>
+<li>The default users of Mercury and FileZilla are known.</li>
+</ul>
 To setup a password:
 
 In *Linux*:
