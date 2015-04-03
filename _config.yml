@@ -4,10 +4,12 @@ logo:             logo.jpg
 disqus_shortname: kkblogin
 share:            true
 dropcap:			true
+fin_color: "255,255,255"
+readtime: true
 # Change url to your domain. Leave localhost server or blank when working locally.
 # or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same 
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
-url: 'http://blog.kranthikiran.in'
+url: ''
 # Owner/author information
 owner:
   name:           Kranthi Kiran
@@ -40,6 +42,8 @@ links:
     url: /featured
   - title: Categories
     url: /categories
+  - title: About
+    url: http://www.kranthikiran.in/
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Asia/Kolkata
 future:      true
