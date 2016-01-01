@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Print html div using Javascript"
-description:
+title: "Print HTML <div> using Javascript"
+description:"Print a specific HTML <div> using JS"
 headline:
 modified: 2016-01-02
 category: Web Development
