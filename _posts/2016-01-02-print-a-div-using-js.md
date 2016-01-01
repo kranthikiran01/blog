@@ -39,6 +39,6 @@ To use the above function just use an onclick handler on a button as shown below
 </div>
 {%endhighlight%}
 
-Hope, this article helps someone who is having a similar requirement as mine and this script comes in handy many times specifically when working on printing a certain HTML DIV.
+Hope, this article helps someone who is having a similar requirement as mine and this script comes in handy to print a certain HTML <div>.
 
 Cheers!!
