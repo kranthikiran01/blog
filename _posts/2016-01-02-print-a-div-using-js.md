@@ -14,7 +14,7 @@ featured: true
 share: true
 ---
 
-One day while working on one of the many projects, I had to print a HTML div using __Javascript__. A naive way would be to use the `window.print()` function with the **onclick** handler of the button. But, this has issues with the whole body of the page being printed in the output. I wanted only specific HTML *div* uniquely identified by an ID to be printed and not the whole body of the page. Hence, I found this below function to be very useful and being using it in similar scenarios whenever I need a certain *div* to be printed.
+One day while working on one of the many projects, I had to print a HTML div using __Javascript__. A naive way would be to use the `window.print()` function with the **onclick** handler of the button. But, this has issues with the whole body of the page being printed in the output. I wanted only specific HTML *div* uniquely identified by an ID to be printed and not the whole body of the page. Hence, I found this below function to be very useful and have been using it in similar scenarios whenever I need a certain *div* to be printed.
 
 {%highlight javascript%}
 <script>
