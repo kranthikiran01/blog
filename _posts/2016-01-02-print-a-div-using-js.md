@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Print HTML <div> using Javascript"
+title: "Print HTML div using Javascript"
 description:
 headline:
 modified: 2016-01-02
