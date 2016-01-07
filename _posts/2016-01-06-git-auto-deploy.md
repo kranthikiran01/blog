@@ -20,7 +20,7 @@ While working on one of the projects, one of my client wanted to edit few meta t
 
 I have cloned the repository right away and started experimenting with it. Its very simple to setup and follow the instructions as provided in the README file.
 
-Follow the instructions and test it with a webhook. While using this script behind a proxy, one might face issues with a blocked ssh url. When we push to the repository for the first time, if the proxy blocks in pulling on the server, we can see a message like "Unable to find the repository *<ssh:url>* in the config". We need to copy that "*<ssh:url>*" and update it in the `url` field of `GitAutoDeploy`. Now, we need to use the insteadOf feature provided by `git`. Use the following command to convert `git@` to `http` urls.
+Follow the instructions and test it with a webhook. While using this script behind a proxy, one might face issues with a blocked ssh url. When we push to the repository for the first time, if the proxy blocks in pulling on the server, we can see a message like "Unable to find the repository *ssh-url* in the config". We need to copy that `*ssh-url*` and update it in the `url` field of `GitAutoDeploy`. Now, we need to use the insteadOf feature provided by `git`. Use the following command to convert `git@` to `http` urls.
 
 >git config --global url.http://github.com/.insteadOf git://github.com/
 
